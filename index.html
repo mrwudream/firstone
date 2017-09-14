@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            font-size: 0;
+        }
+
+        .container{
+            width: 1200px;
+            height: 550px;
+            margin: 50px auto;
+            border: 1px solid rgba(230, 71, 174, 0.95);
+        }
+        li{
+            width: 150px;
+            height: 50px;
+            overflow: hidden;
+            display: inline-block;
+            border: 1px solid fuchsia;
+            box-sizing: border-box;
+            position: relative;
+        }
+        li>img{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        body{
+            background: url("bjj.jpg") 50% 50%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="div0">
+        <ul>
+            <li><img src="imgs/1.jpg" alt=""/></li>
+            <li><img src="imgs/2.jpeg" alt=""/></li>
+            <li><img src="imgs/3.jpg" alt=""/></li>
+            <li><img src="imgs/4.jpg" alt=""/></li>
+            <li><img src="imgs/5.jpg" alt=""/></li>
+        </ul>
+    </div>
+    <div class="div1">
+        <ul>
+            <li><img src="imgs/6.jpg" alt=""/></li>
+            <li><img src="imgs/7.png" alt=""/></li>
+            <li><img src="imgs/8.jpg" alt=""/></li>
+            <li><img src="imgs/9.jpeg" alt=""/></li>
+            <li><img src="imgs/10.jpg" alt=""/></li>
+        </ul>
+    </div>
+    <div class="div2">
+        <ul>
+            <li><img src="imgs/11.jpg" alt=""/></li>
+            <li><img src="imgs/12.jpeg" alt=""/></li>
+            <li><img src="imgs/13.jpeg" alt=""/></li>
+            <li><img src="imgs/14.jpeg" alt=""/></li>
+            <li><img src="imgs/15.jpeg" alt=""/></li>
+        </ul>
+    </div>
+    <div class="div3">
+        <ul>
+            <li><img src="imgs/16.jpeg" alt=""/></li>
+            <li><img src="imgs/17.jpg" alt=""/></li>
+            <li><img src="imgs/18.jpg" alt=""/></li>
+            <li><img src="imgs/19.jpg" alt=""/></li>
+            <li><img src="imgs/20.jpg" alt=""/></li>
+        </ul>
+    </div>
+</div>
+</body>
+<script src="jquerymin.js"></script>
+<script>
+    $(function(){
+        $('.div0>ul>li').eq(0).stop().animate({'width':600,'height':400}).siblings().stop().animate({'width':150,'height':400});
+        $('.div1>ul>li').eq(0).stop().animate({'width':600,'height':50});
+        $('.div2>ul>li').eq(0).stop().animate({'width':600,'height':50});
+        $('.div3>ul>li').eq(0).stop().animate({'width':600,'height':50});
+
+        var timer = null;
+
+        function move(obj1,obj2,obj3,th,thi){
+            clearTimeout(timer);
+            timer = setTimeout(function(){
+                th.stop().animate({'width':600,'height':400}).siblings().stop().animate({'width':150,'height':400});
+                obj1.eq(thi).stop().animate({'width':600,'height':50}).siblings().stop().animate({'width':150,'height':50});
+                obj2.eq(thi).stop().animate({'width':600,'height':50}).siblings().stop().animate({'width':150,'height':50});
+                obj3.eq(thi).stop().animate({'width':600,'height':50}).siblings().stop().animate({'width':150,'height':50});
+            },200);
+        }
+
+        $('.div0>ul>li').hover(function(){
+            var th = $(this);
+            var thi = $(this).index();
+            move($('.div1>ul>li'),$('.div2>ul>li'),$('.div3>ul>li'),th,thi);
+        });
+
+        $('.div1>ul>li').hover(function(){
+            var th = $(this);
+            var thi = $(this).index();
+            move($('.div0>ul>li'),$('.div2>ul>li'),$('.div3>ul>li'),th,thi);
+        });
+
+        $('.div2>ul>li').hover(function(){
+            var th = $(this);
+            var thi = $(this).index();
+            move($('.div0>ul>li'),$('.div1>ul>li'),$('.div3>ul>li'),th,thi);
+        });
+
+        $('.div3>ul>li').hover(function(){
+            var th = $(this);
+            var thi = $(this).index();
+            move($('.div0>ul>li'),$('.div1>ul>li'),$('.div2>ul>li'),th,thi);
+        })
+    });
+</script>
+</html>
